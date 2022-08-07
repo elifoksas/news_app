@@ -24,11 +24,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("World",style:TextStyle(
+              color: Colors.blueGrey
             )),
             Text("News", style: TextStyle(
               color: Colors.black
