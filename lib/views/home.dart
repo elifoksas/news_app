@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/helper/data.dart';
 import 'package:news_app/models/category_model.dart';
 import 'package:news_app/views/article_view.dart';
+import 'package:news_app/views/category_news.dart';
 
 import '../helper/news.dart';
 import '../models/article_model.dart';
@@ -104,14 +105,21 @@ class _HomeState extends State<Home> {
 }
 
 class CategoryTile extends StatelessWidget {
-  final imageUrl, categorieName;
+  final String? imageUrl, categorieName;
   CategoryTile({this.imageUrl, this.categorieName});
 
   //üst kısımdaki kategoriler
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryNews(
+                      category: categorieName?.toLowerCase(),
+                    )));
+      },
       child: Container(
         margin: EdgeInsets.only(right: 16),
         child: Stack(
@@ -119,7 +127,7 @@ class CategoryTile extends StatelessWidget {
             ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: CachedNetworkImage(
-                  imageUrl: imageUrl,
+                  imageUrl: imageUrl!,
                   width: 120,
                   height: 60,
                   fit: BoxFit.cover,
@@ -133,7 +141,7 @@ class CategoryTile extends StatelessWidget {
                 color: Colors.black26,
               ),
               child: Text(
-                categorieName,
+                categorieName!,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
