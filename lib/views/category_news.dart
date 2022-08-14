@@ -21,16 +21,14 @@ class _CategoryNewsState extends State<CategoryNews> {
     super.initState();
   }
 
-  /*getCategoryNews() async {
-    CategoryNewsClass newsClass = CategoryNews() as CategoryNewsClass;
-    await CategoryNewsClass.getNews(widget.category);
-    articles = newsClass.news;
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,40 +50,45 @@ class _CategoryNewsState extends State<CategoryNews> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            ///blogs
-            Container(
-              padding: EdgeInsets.only(top: 16),
-              child: FutureBuilder(
-                future: CategoryNewsClass.getNews(widget.category!),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<Articles>?> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  } else {
-                    List<Articles> list = snapshot.data!;
-                    return ListView.builder(
-                        padding: EdgeInsets.only(top: 16),
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemCount: list.length,
-                        itemBuilder: (context, index) {
-                          var currentArticle = list[index];
-                          return BlogTile(
-                              url: currentArticle.url!,
-                              imageUrl: currentArticle.urlToImage!,
-                              title: currentArticle.title!,
-                              desc: currentArticle.description!);
-                        });
-                  }
-                },
-              ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                ///blogs
+                Container(
+                  padding: EdgeInsets.only(top: 16),
+                  child: FutureBuilder(
+                    future: CategoryNewsClass.getNews(widget.category!),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Articles>?> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      } else {
+                        List<Articles> list = snapshot.data!;
+                        return ListView.builder(
+                            padding: EdgeInsets.only(top: 16),
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: list.length,
+                            itemBuilder: (context, index) {
+                              var currentArticle = list[index];
+                              return BlogTile(
+                                  url: currentArticle.url!,
+                                  imageUrl: currentArticle.urlToImage!,
+                                  title: currentArticle.title!,
+                                  desc: currentArticle.description!);
+                            });
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

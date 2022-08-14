@@ -60,6 +60,7 @@ class _HomeState extends State<Home> {
                       return CategoryTile(
                         imageUrl: categories[index].imageUrl,
                         categorieName: categories[index].categoryName,
+                        categoryText: categories[index].categoryText!,
                       );
                     }),
               ),
@@ -106,7 +107,8 @@ class _HomeState extends State<Home> {
 
 class CategoryTile extends StatelessWidget {
   final String? imageUrl, categorieName;
-  CategoryTile({this.imageUrl, this.categorieName});
+  final String categoryText;
+  CategoryTile({this.imageUrl, this.categorieName, required this.categoryText});
 
   //üst kısımdaki kategoriler
   @override
@@ -141,7 +143,7 @@ class CategoryTile extends StatelessWidget {
                 color: Colors.black26,
               ),
               child: Text(
-                categorieName!,
+                categoryText!,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

@@ -1,6 +1,5 @@
- class CategoryModel{
-
-  String? categoryName= "";
-  String? imageUrl="";
-
+class CategoryModel {
+  String? categoryName = "";
+  String? imageUrl = "";
+  String? categoryText = "";
 }
