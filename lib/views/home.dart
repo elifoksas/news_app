@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/helper/data.dart';
 import 'package:news_app/models/category_model.dart';
+import 'package:news_app/views/article_view.dart';
 
 import '../helper/news.dart';
 import '../models/article_model.dart';
@@ -31,9 +33,9 @@ class _HomeState extends State<Home> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("World", style: TextStyle(color: Colors.blueGrey)),
+            Text("Türkiye", style: TextStyle(color: Colors.red)),
             Text(
-              "News",
+              "Haber",
               style: TextStyle(color: Colors.black),
             )
           ],
@@ -41,55 +43,60 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            ///Categories
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              height: 70,
-              child: ListView.builder(
-                  itemCount: categories.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return CategoryTile(
-                      imageUrl: categories[index].imageUrl,
-                      categorieName: categories[index].categoryName,
-                    );
-                  }),
-            ),
-
-            ///blogs
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(top: 16),
-                child: FutureBuilder(
-                  future: News.getNews(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Articles>?> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator.adaptive(),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: <Widget>[
+              ///Categories
+              Container(
+                height: 70,
+                child: ListView.builder(
+                    itemCount: categories.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CategoryTile(
+                        imageUrl: categories[index].imageUrl,
+                        categorieName: categories[index].categoryName,
                       );
-                    } else {
-                      List<Articles> list = snapshot.data!;
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: list.length,
-                          itemBuilder: (context, index) {
-                            var currentArticle = list[index];
-                            return BlogTile(
-                                imageUrl: currentArticle.urlToImage!,
-                                title: currentArticle.title!,
-                                desc: currentArticle.description!);
-                          });
-                    }
-                  },
-                ),
+                    }),
               ),
-            )
-          ],
+
+              ///blogs
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(top: 16),
+                  child: FutureBuilder(
+                    future: News.getNews(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Articles>?> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      } else {
+                        List<Articles> list = snapshot.data!;
+                        return ListView.builder(
+                            padding: EdgeInsets.only(top: 16),
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: list.length,
+                            itemBuilder: (context, index) {
+                              var currentArticle = list[index];
+                              return BlogTile(
+                                  url: currentArticle.url!,
+                                  imageUrl: currentArticle.urlToImage!,
+                                  title: currentArticle.title!,
+                                  desc: currentArticle.description!);
+                            });
+                      }
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -111,8 +118,8 @@ class CategoryTile extends StatelessWidget {
           children: <Widget>[
             ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Image.network(
-                  imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   width: 120,
                   height: 60,
                   fit: BoxFit.cover,
@@ -141,22 +148,45 @@ class CategoryTile extends StatelessWidget {
 }
 
 class BlogTile extends StatelessWidget {
-  final String imageUrl, title, desc;
-  BlogTile({required this.imageUrl, required this.title, required this.desc});
+  final String imageUrl, title, desc, url;
+  BlogTile(
+      {required this.imageUrl,
+      required this.title,
+      required this.desc,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Image.network(
-            imageUrl,
-          ),
-          Text(
-            title,
-          ),
-          Text(desc),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)));
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 27),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.network(
+                imageUrl,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(height: 8),
+            Text(desc,
+                style: TextStyle(
+                  color: Colors.black54,
+                )),
+          ],
+        ),
       ),
     );
   }

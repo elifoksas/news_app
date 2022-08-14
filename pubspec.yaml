@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.5
+  webview_flutter: ^3.0.4
   cached_network_image: ^3.2.1
 
 
