@@ -1,6 +1,6 @@
 # News App
 
-<h2>Merhabalar👋🏻<h2/>
+<h3>Merhabalar👋🏻<h3/>
 
   <p>
   📌Flutter ile geliştirdiğim bu haber uygulamasında API'dan son dakika haber başlıklarını alıyor, haber kaynaklarından ve bloglardan makaleler arayabiliyoruz.<br>
