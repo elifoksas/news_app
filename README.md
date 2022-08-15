@@ -1,10 +1,11 @@
 # News App
 
-Merhabalar👋🏻
-📌Flutter ile geliştirdiğim bu haber uygulamasında API'dan son dakika haber başlıklarını alıyor, haber kaynaklarından ve bloglardan makaleler arayabiliyoruz.
-📌Kategorilere göre farklı haberlere de göz atabiliriz.
-📌API için newsapi.org sitesini kullandım.
-📌Haber kaynaklara ve bloglara gitmek için WebView kullandım.
+<h1>Merhabalar👋🏻<h1/>
+
+  <p>📌Flutter ile geliştirdiğim bu haber uygulamasında API'dan son dakika haber başlıklarını alıyor, haber kaynaklarından ve bloglardan makaleler arayabiliyoruz.<p/>
+  <p>📌Kategorilere göre farklı haberlere de göz atabiliriz.</p>
+  <p>📌API için newsapi.org sitesini kullandım.</p>
+  <p>📌Haber kaynaklara ve bloglara gitmek için WebView kullandım.</p>
 
 
 <p align="center">
