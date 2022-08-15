@@ -2,10 +2,12 @@
 
 <h2>Merhabalar👋🏻<h2/>
 
+  <p>
   📌Flutter ile geliştirdiğim bu haber uygulamasında API'dan son dakika haber başlıklarını alıyor, haber kaynaklarından ve bloglardan makaleler arayabiliyoruz.<br>
   📌Kategorilere göre farklı haberlere de göz atabiliriz.<br>
   📌API için newsapi.org sitesini kullandım.<br>
   📌Haber kaynaklara ve bloglara gitmek için WebView kullandım.<br>
+  </p>
 
 
 <p align="center">
