@@ -1,12 +1,12 @@
 # News App
 
-<h3>Merhabalar👋🏻<h3/>
+<h3>Hi👋🏻<h3/>
 
   <p>
-  📌Flutter ile geliştirdiğim bu haber uygulamasında API'dan son dakika haber başlıklarını alıyor, haber kaynaklarından ve bloglardan makaleler arayabiliyoruz.<br>
-  📌Kategorilere göre farklı haberlere de göz atabiliriz.<br>
-  📌API için newsapi.org sitesi kullanıldı.<br>
-  📌Haber kaynaklarına ve bloglara gitmek için WebView kullanıldı.<br>
+  📌In this news application that I developed with Flutter, we can get breaking news headlines from the API and search for articles from news sources and blogs.<br>
+  📌We can also browse different news according to categories.<br>
+  📌The newsapi.org site was used for the API.<br>
+  📌WebView was used to navigate to news feeds and blogs.<br>
   </p>
 
 
